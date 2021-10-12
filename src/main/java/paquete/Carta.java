@@ -3,36 +3,58 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juegocartas;
+package paquete;
 
 import java.util.*;
 
 /**
+ * Generar Carta de la baraja
  *
- * @author ramjam
+ * @Autor Oscar Lopez Plata
+ * @Version: 12/10/2021
  */
 public class Carta {
-    
+
     public int numero;
-    public String figura;
+    public int palo; //Simbolos ASCCII
     public String color;
 
     /**
-     * Constructor for objects of class Carta
+     * Constructor de Carta Default
      */
-    
-    
     public Carta() {
         this.numero = 1;
         this.color = "negro";
-        this.figura = "corazon";
+        this.palo = 9829;
     }
-    
-    public Carta(int numero, String figura, String color)
-    {
+
+    /**
+     * Constructor de Carta por parametros
+     *
+     * @param numero Numero de la carta
+     * @param palo Figura de la carta Usar ASCII CORAZON= 9829, ROMBO=9830,
+     * TREBOL=9827, ESPADA=9824
+     * @param color Color de la carta
+     */
+    public Carta(int numero, int palo, String color) {
         this.numero = numero;
-        this.figura = figura;
+        this.palo = palo;
         this.color = color;
+    }
+
+    public void setNumero(int num) {
+        if (num >= 1 && num <= 13) {
+            this.numero = num;
+        } else {
+            System.out.println("Valor no admitido");
+        }
+    }
+    /**
+     * Regresa el Numero de la carta
+     * @return  numero de carta
+     */
+    public int getNumero(){
+        return this.numero;
     }
 
     public String getColor() {
@@ -40,18 +62,18 @@ public class Carta {
     }
 
     public void setColor(String color) {
-        if(color.equals("rojo")) 
+        color = color.toLowerCase();
+        if (color.equals("rojo")) {
             this.color = color;
-        else if(color.equals("negro"))
-                this.color = color;
-        else
+        } else if (color.equals("negro")) {
+            this.color = color;
+        } else {
             System.out.println("Solo es color negro o rojo");
+        }
     }
-    
-    public boolean compararNumero(Carta otra)
-    {
-        if(numero == otra.numero)
-        {
+
+    public boolean compararNumero(Carta otra) {
+        if (numero == otra.numero) {
             return true;
 
         }
@@ -59,10 +81,8 @@ public class Carta {
         return false;
     }
 
-    public boolean esMayorNumero(Carta otra)
-    {
-        if(numero > otra.numero)
-        {
+    public boolean esMayorNumero(Carta otra) {
+        if (numero > otra.numero) {
             return true;
 
         }
@@ -70,115 +90,91 @@ public class Carta {
         return false;
     }
 
-    public boolean esMenorNumero(Carta otra)
-    {
-        if(numero < otra.numero)
-        {
-            return true;           
+    public boolean esMenorNumero(Carta otra) {
+        if (numero < otra.numero) {
+            return true;
         }
 
         return false;
     }
 
-    public void crearCartaNueva()
-    {
+    public void crearCartaNueva() {
         Random alea = new Random();
         int aleatorio;
 
-        aleatorio = alea.nextInt(4)+1;
-        switch(aleatorio){
+        aleatorio = alea.nextInt(4) + 1;
+        switch (aleatorio) {
             case 1:
-            figura = "corazon";
-            break;
+                figura = "corazon";
+                break;
             case 2:
-            figura = "diamante";
-            break;
+                figura = "diamante";
+                break;
             case 3:
-            figura = "espada";
-            break;
+                figura = "espada";
+                break;
             case 4:
-            figura = "trebol";
-            break;
+                figura = "trebol";
+                break;
 
         }
 
     }
 
-    public void mostrar()
-    {
-        switch(numero)
-        {
+    public void mostrar() {
+        switch (numero) {
             case 1:
-            System.out.print("A ");
-            break;
+                System.out.print("A ");
+                break;
             case 11:
-            System.out.print("J ");
-            break;
+                System.out.print("J ");
+                break;
             case 12:
-            System.out.print("Q ");
-            break;
+                System.out.print("Q ");
+                break;
             case 13:
-            System.out.print("K ");
-            break;
+                System.out.print("K ");
+                break;
             default:
-            System.out.print(numero+" ");
+                System.out.print(numero + " ");
         }
 
         System.out.println(figura);
 
     }
 
-    public void setNumero(int num)
-    {
-        numero = num;
-
-        if(numero >= 1 && numero <= 13)
-        {
-            numero = num;
-        }
-        else
-        {
-            System.out.println("Valor no admitido");
-        }
-    }
-
-    public int getNumero()
-    {
+    public int getNumero() {
         return numero;
     }
 
     //♥♦♣♠
-
-    public void setFigura(String palo)
-    {
+    public void setFigura(String palo) {
         figura = palo;
 
-        switch(palo)
-        {
+        switch (palo) {
             case "corazon":
-            figura = "♥";
-            break;
+                figura = "♥";
+                break;
             case "trabol":
-            figura = "♣";
-            break;
+                figura = "♣";
+                break;
             case "diamante":
-            figura = "♦";
-            break;
+                figura = "♦";
+                break;
             case "espada":
-            figura = "♠";
-            break;
+                figura = "♠";
+                break;
         }
     }
 
-    public String getFigura()
-    {
+    public String getFigura() {
         return figura;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         setFigura(figura);
-        return numero+""+figura+" "+color;
+        return numero + "" + figura + " " + color;
     }
-    
+
 }
