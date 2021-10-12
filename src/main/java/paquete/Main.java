@@ -7,7 +7,7 @@ package paquete;
 
 /**
  *
- * @author oscar
+ * @author Oscar Lopez
  */
 public class Main {
 
@@ -16,8 +16,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String HM="Hola Mundo ☺";
-        System.out.println(HM);
+        String HM="Hola Mundo ";
+        System.out.println(HM + "OSCAR");
     }
     
 }
