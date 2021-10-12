@@ -42,6 +42,10 @@ public class Baraja{
         //entregarCarta();
     }
     
+    /**
+     * 
+     * @return
+     */
     public Carta entregarCarta()
     {
         Carta temp = new Carta(0, "0", "blanco");

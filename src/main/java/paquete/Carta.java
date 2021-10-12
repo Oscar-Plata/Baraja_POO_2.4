@@ -143,9 +143,7 @@ public class Carta {
 
     }
 
-    public int getNumero() {
-        return numero;
-    }
+    
 
     //♥♦♣♠
     public void setFigura(String palo) {
@@ -168,13 +166,13 @@ public class Carta {
     }
 
     public String getFigura() {
-        return figura;
+        return palo;
     }
 
     @Override
     public String toString() {
-        setFigura(figura);
-        return numero + "" + figura + " " + color;
+        setFigura(palo);
+        return numero + "" + palo + " " + color;
     }
 
 }
