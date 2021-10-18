@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class Jugador
 {
     private ArrayList<Carta> mano;
-    private int ola;
 
     /**
      * Constructor for objects of class Jugador
