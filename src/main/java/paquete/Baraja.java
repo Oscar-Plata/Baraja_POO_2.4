@@ -3,132 +3,57 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juegocartas;
+package paquete;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
 
 /**
- *
- * @author ramjam
+ * Baraja del juego, se encarga de crear una coleccion de cartas 
+ * que pueden ser obtenidas al azar y ser entregadas a jugadores.
+ * 
+ * @author Oscar Joel L Plata
+ * @version 17/11/21
  */
-public class Baraja{
-    
-    public ArrayList<Carta> cartas, mano;
-
-    /**
-     * Constructor for objects of class Baraja
-     */
-    public Baraja()
-    {
-        cartas = new ArrayList();
-        llenarBaraja();
+public class Baraja {
+     public ArrayList<Carta> cartas;
+    public Baraja(){
+        this.cartas=new ArrayList<>(52);
     }
 
-    public void barajear()
-    {
-        Random alea = new Random();
-        for (int i=0; i<cartas.size(); i++)
-        {
-            Carta carta1 = cartas.get(i);
-            int posicion = alea.nextInt(cartas.size());
-            Carta cartaAleatoria = cartas.get(posicion);
-
-            //intercambiar cartas
-            cartas.set(i,cartaAleatoria);
-            cartas.set(posicion,carta1);
-
+    public void llenarBaraja(){
+        for(int i=1;i<=13;i++){
+            cartas.add(new Carta(i," R",9829));
+            cartas.add(new Carta(i," R",9830));
+            cartas.add(new Carta(i," N",9827));
+            cartas.add(new Carta(i," N",9824));
         }
-        //entregarCarta();
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    public Carta entregarCarta()
-    {
-        Carta temp = new Carta(0, "0", "blanco");
-        if(cartas.size()==0){            
-            System.out.println("Ya no hay cartas");
-        }
-        else{
-            Carta cartaNueva = cartas.remove(0);
-            temp = cartaNueva;
-            cartaNueva.mostrar();            
-        }
-        return temp;
     }
 
-    public ArrayList<Carta> getMano(){
-        mano = new ArrayList<>();
-
-        if(cartas.size()>=5){
-            for(int i=0;i<5;i++){
-                Carta cartaNueva = cartas.remove(0);
-                //System.out.println("Carta removita " );
-                cartaNueva.mostrar();
-                mano.add(cartaNueva);
-            }
-        }        
-        else if(cartas.size()==0){            
-            System.out.println("Ya no hay cartas");
+    public void mostrarBaraja(){
+        System.out.println("cartas de la baraja:\n");
+        int c=cartas.size();
+        for(int i=0;i<c;i++){
+            System.out.println(cartas.get(i).toString()+"\n");
         }
-        else if(cartas.size()<=4){
-            for(int i=0;i<cartas.size();i++){
-                Carta cartaNueva = cartas.remove(0);
-                //System.out.println("Carta removita " );
-                cartaNueva.mostrar();
-                mano.add(cartaNueva);
-            }
-        }
-        return mano;
     }
 
-    public void llenarBaraja()
-    {
-        String figuras = "♥♦♣♠";
-        String color="negro";
-        for (int i=1; i<=13; i++)
-        {
-            for(int j=0; j<4; j++)
-            {
-                if(i<2)
-                    color="negro";
-                else
-                    color="rojo";
-                String figura = figuras.substring(j,j+1);
-                //System.out.println("La figura es "+figura);
-
-                Carta nuevaCarta = new Carta(i,figura,color);
-                //nuevaCarta.mostrar();
-                //System.out.println(cartas.size());
-                cartas.add(nuevaCarta);
-                //System.out.println(cartas.size());
-            }
-        }
-
+    public void revolver(){
+        Collections.shuffle(cartas);
     }
 
-    public void mostrar()
-    {
-        if(cartas.size()==0){            
-            System.out.println("Ya no hay cartas");
+    public Carta darCarta(){
+        Carta aux= cartas.get(0);
+        cartas.remove(0);
+        return aux;
+    } 
+
+    public ArrayList<Carta> darCartas(int x){
+        ArrayList<Carta> aux= new ArrayList<>(x);
+        for(int i=0;i<x;i++){
+            aux.add(cartas.get(0));
+            cartas.remove(0);
         }
-        else{
-            for (Carta carta : cartas)
-            {
-                carta.mostrar();
-            }
-        }
-        //El metodo for de arriba es equivalente a este
-        /*
-        for(int i=0; i<cartas.size(); i++)
-        {
-        Carta carta = cartas.get(i);
-        carta.mostrar();
-        }
-         */
+        return aux;
     }
-    
 }
